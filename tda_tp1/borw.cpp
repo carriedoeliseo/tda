@@ -13,17 +13,17 @@ int borw (int i, int lastb, int lastw) {
     if (i == N) {
         return 0;
 
-    } else if (lastw >= s[i] <= lastb) {
+    } else if (lastw <= s[i] && s[i] <= lastb) {
         return (borw(i+1, lastb, lastw) + 1);
 
-    } else if (lastw < s[i] <= lastb) {
+    } else if (lastw > s[i] && s[i] <= lastb) {
         return (min(borw(i+1, lastb, s[i]), borw(i+1, lastb, lastw) + 1));
 
-    } else if (lastw >= s[i] > lastb) {
+    } else if (lastw <= s[i] && s[i] > lastb) {
         return (min(borw(i+1, s[i], lastw), borw(i+1, lastb, lastw) + 1));
 
     } else {
-        return (min(borw(i+1, s[i], lastw), min(borw(i+1, lastb, s[i]), borw(i+1, lastb, lastw) + 1)));
+        return (min(min(borw(i+1, s[i], lastw), borw(i+1, lastb, s[i])), borw(i+1, lastb, lastw) + 1));
 
     }
 }
