@@ -1,7 +1,8 @@
 #include <iostream>
+#include <vector>
 
 #define MAXN 200
-#define MAXXi 10^6
+#define MAXXi 1e6
 #define INF 1e9
 
 using namespace std;
@@ -29,13 +30,21 @@ int borw (int i, int lastb, int lastw) {
 }
 
 int main () {
+    vector<int> outputs;
     cin >> N;
-    for (int i = 0; i < N; i++) {
-        int xi; cin >> xi;
-        s[i] = xi;
+    while (N != -1) {
+        for (int i = 0; i < N; i++) {
+            int xi; cin >> xi;
+            s[i] = xi;
+
+        }
+        outputs.push_back(borw(0, -1, INF));
+        cin >> N;
+    }
+    for (int i = 0; i < outputs.size(); i++) {
+        cout << outputs[i] << endl;
 
     }
-    int minusone; cin >> minusone;
-    cout << borw(0, -1, INF);
-
+    return 0;
+    
 }
