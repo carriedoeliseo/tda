@@ -1,35 +1,43 @@
 #include <iostream>
+#include <vector>
 #define N 100
+#define INF 1e9
 using namespace std;
 
 int n;
 int sol_sum;
 int sol_pi[N];
+int act_pi[N];
+int C[N];
 int D[N][N];
 
-int suma (int D[n][n], int pi[n]) {
-    int res = D[pi[n-1]][pi[0]];
-    for (int i = 0; i < n-2; i++) {
-        res = res + D[pi[i]][pi[i+1]];
+int suma () {
+    int res = D[act_pi[n-1]][act_pi[0]];
+    for (int i = 0; i < n-1; i++) {
+        res = res + D[act_pi[i]][act_pi[i+1]];
 
     }
     return res;
+
 }
 
-void rutaminima (int i; int pi[n], int C[n]) {
+void rutaminima (int i) {
     if (i == n) {
-        if (suma(D, pi) <= sol_sum) {
-            sol_pi = pi;
-            sol_sum = suma(D, pi);
+        if (suma() <= sol_sum) {
+            for (int j = 0; j < n; j++) {
+                sol_pi[j] = act_pi[j];
+
+            }
+            sol_sum = suma();
 
         }
     } else {
         for (int k = 0; k < n; k++) {
             if (C[k] != -1) {
-                int pii = C[k];
-                pi[i] = pii; C[k] = -1;
-                rutaminima(i+1, pi, C)
-                C[k] = pii;
+                act_pi[i] = C[k]; 
+                C[k] = -1;
+                rutaminima(i+1);
+                C[k] = act_pi[i];
 
             }
         }
@@ -41,11 +49,23 @@ int main () {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             int dij; cin >> dij;
-            D[i][j] =
+            D[i][j] = dij;
+            
 
         }
+        C[i] = i;
 
     }
+    sol_sum = INF;
+    rutaminima (0);
+    cout << "{ ";
+    for (int i = 0; i < n; i++) {
+        cout << sol_pi[i]+1 << " ";
+
+    }
+    cout << "}" << endl;
+    cout << sol_sum ; 
+    return 0;
 
 }
 
