@@ -1,49 +1,56 @@
 #include <iostream>
 #include <vector>
 
-#define MAXN 200
-#define MAXXi 1e6
+#define MAXN 202
 #define INF 1e9
 
 using namespace std;
 
 int N;
 int s[MAXN];
+int M[MAXN][MAXN][MAXN];
 
 int borw (int i, int lastb, int lastw) {
-    if (i == N) {
+    if (M[i][lastb][lastw] != -1) {
+        return M[i][lastb][lastw];
+
+    } else if (i == N) {
         return 0;
 
-    } else if (lastw <= s[i] && s[i] <= lastb) {
-        return (borw(i+1, lastb, lastw) + 1);
+    } else if (s[lastw] <= s[i] && s[i] <= s[lastb]) {
+        return M[i][lastb][lastw] = borw(i+1, lastb, lastw) + 1;
 
-    } else if (lastw > s[i] && s[i] <= lastb) {
-        return (min(borw(i+1, lastb, s[i]), borw(i+1, lastb, lastw) + 1));
+    } else if (s[lastw] > s[i] && s[i] <= s[lastb]) {
+        return M[i][lastb][lastw] =  min(borw(i+1, lastb, i), borw(i+1, lastb, lastw) + 1);
 
-    } else if (lastw <= s[i] && s[i] > lastb) {
-        return (min(borw(i+1, s[i], lastw), borw(i+1, lastb, lastw) + 1));
+    } else if (s[lastw] <= s[i] && s[i] > s[lastb]) {
+        return M[i][lastb][lastw] =  min(borw(i+1, i, lastw), borw(i+1, lastb, lastw) + 1);
 
     } else {
-        return (min(min(borw(i+1, s[i], lastw), borw(i+1, lastb, s[i])), borw(i+1, lastb, lastw) + 1));
+        return M[i][lastb][lastw] = min(min(borw(i+1, i, lastw), borw(i+1, lastb, i)), borw(i+1, lastb, lastw) + 1);
 
     }
 }
 
 int main () {
-    vector<int> outputs;
+    s[200] = -1; s[201] = INF;
     cin >> N;
     while (N != -1) {
+        for (int i = 0; i < MAXN; i++){
+            for (int j = 0; j < MAXN; j++){
+                for (int k = 0; k < MAXN; k++){
+                    M[i][j][k] = -1;
+
+                }
+            }
+        }
         for (int i = 0; i < N; i++) {
             int xi; cin >> xi;
             s[i] = xi;
 
         }
-        outputs.push_back(borw(0, -1, INF));
+        cout << borw(0, 200, 201) << endl;
         cin >> N;
-    }
-    for (int i = 0; i < outputs.size(); i++) {
-        cout << outputs[i] << endl;
-
     }
     return 0;
     
