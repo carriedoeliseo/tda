@@ -1,50 +1,54 @@
 #include <iostream>
-#include <vector>
 #include <algorithm>
 
-#define MAXX 1000000001
 #define MAXN 100000
 
 int t, N, C;
-int s[MAXN];
-int d[MAXN];
+int stall[MAXN];
 
 using namespace std;
 
-
-
-int aggrcow (int i) {
-    for (int j = i+1; j < N-1; j++) {
-        int distance = s[j] - s[i];
-        for (int c = 0; c < C-1; c++) {
-            if (distance > d[c]) {
-                int temp = d[c];
-                d[c] = distance;
-                distance = temp;
-
-            }
+bool check_distance (int d) {
+    int last = 0;
+    int cont = 1;
+    for (int i = 1; i < N; i++) {
+        if (stall[i] >= stall[last] + d) {
+            cont++;
+            last = i;
+            
         }
+        if (cont == C) return true;
+
     }
-    if (i < N-1) aggrcow(i+1);
+    return false;
 
 }
+
+int aggrcow () {
+    int first = 1;
+    int last = stall[N-1] - stall[0];
+    while (first < last-1) {
+        int mid = (last + first)/2;
+        if (check_distance(mid)) first = mid;
+        else last = mid-1;
+
+    }
+    if (check_distance(last)) return last;
+    else return first;
+
+}
+
 
 int main () {
     cin >> t;
     for (int k = 0; k < t; k++) {
         cin >> N >> C;
-        for (int n = 0; n < N; n++) {
-            int xi; cin >> xi;
-            s[n] = xi;
+        for (int i = 0; i < N; i++) {
+            cin >> stall[i];
 
         }
-        sort(s, s+N);
-        for (int c = 0; c < C-1; c++) {
-            d[c] = -1;
-
-        }
-        aggrcow(0);
-        cout << d[C-2] << endl;
+        sort(stall, stall+N);
+        cout << aggrcow() << endl;
 
     }
     return 0;
