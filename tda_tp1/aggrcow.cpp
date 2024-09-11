@@ -31,11 +31,11 @@ int aggrcow () {
         int mid = (last + first)/2;
         if (check_distance(mid)) first = mid;
         else last = mid-1;
-
+ 
     }
     if (check_distance(last)) return last;
     else return first;
-
+ 
 }
 
 
