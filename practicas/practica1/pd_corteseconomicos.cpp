@@ -74,7 +74,7 @@ int main() {
             }
         }
     }
-    cout << ce_top(0, cs+1, 1) << endl;
+    cout << ce_top(0, n+1, 1) << endl;
     return 0;
 
 }
