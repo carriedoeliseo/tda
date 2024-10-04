@@ -1,3 +1,0 @@
-C:/Users/carri/Documents/UBA/algoritmos3/tda/cmake-build-debug/CMakeFiles/tda.dir
-C:/Users/carri/Documents/UBA/algoritmos3/tda/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/carri/Documents/UBA/algoritmos3/tda/cmake-build-debug/CMakeFiles/rebuild_cache.dir
