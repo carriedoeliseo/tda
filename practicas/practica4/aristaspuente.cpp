@@ -13,9 +13,9 @@ void dfs (int v, int p = -1) {
             treeEdges[v].push_back(u);
             dfs(u, v);
 
-        } else if (u != p) {
-            backEdgeSup[u]++;
-            backEdgeInf[v]++;
+        } else if (estado[u] == 1) {
+            backEdgeSup[v]++;
+            backEdgeInf[u]++;
 
         }
     }
@@ -32,7 +32,6 @@ int cubren (int v) {
         res += cubren(hijo);
 
     }
-
     memo[v] = res;
     return res;
 
