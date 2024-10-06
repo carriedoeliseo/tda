@@ -1,0 +1,10 @@
+# ninja log v6
+2	347	7498734195128068	build.ninja	16f6b57d3b42c686
+30	505	7498458792950159	CMakeFiles/practicas.dir/practica4/aristaspuente.cpp.obj	ad69336bb1130e90
+7	612	7498733816748744	CMakeFiles/aristapuente.dir/practica4/aristaspuente.cpp.obj	3c4a137d4df38989
+507	633	7498458797718447	practicas.exe	49c5fe76cdc9742b
+614	875	7498733822811828	aristapuente.exe	66ac46c709b1ee62
+3	452	7498464964208473	CMakeFiles/distanicamax.dir/practica2/dq_distanciamax.cpp.obj	b81adcb395471c65
+453	587	7498464968708630	distanicamax.exe	c1a8ef77a1471fad
+10	660	7498734265073971	CMakeFiles/aristapuente.dir/practica4/aristaspuente.cpp.obj	3c4a137d4df38989
+663	937	7498734271618214	aristapuente.exe	66ac46c709b1ee62

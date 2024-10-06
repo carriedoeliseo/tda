@@ -1,0 +1,4 @@
+C:/Users/carri/Documents/UBA/algoritmos3/tda/practicas/cmake-build-debug/CMakeFiles/aristapuente.dir
+C:/Users/carri/Documents/UBA/algoritmos3/tda/practicas/cmake-build-debug/CMakeFiles/distanicamax.dir
+C:/Users/carri/Documents/UBA/algoritmos3/tda/practicas/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/carri/Documents/UBA/algoritmos3/tda/practicas/cmake-build-debug/CMakeFiles/rebuild_cache.dir
