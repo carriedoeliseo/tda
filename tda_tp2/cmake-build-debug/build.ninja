@@ -73,6 +73,72 @@ build bipartitud.exe: CXX_EXECUTABLE_LINKER__bipartitud_Debug CMakeFiles/biparti
   TARGET_IMPLIB = libbipartitud.dll.a
   TARGET_PDB = bipartitud.exe.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target tuneles
+
+
+#############################################
+# Order-only phony target for tuneles
+
+build cmake_object_order_depends_target_tuneles: phony || .
+
+build CMakeFiles/tuneles.dir/tuneles.cpp.obj: CXX_COMPILER__tuneles_unscanned_Debug C$:/Users/carri/Documents/UBA/algoritmos3/tda/tda_tp2/tuneles.cpp || cmake_object_order_depends_target_tuneles
+  DEP_FILE = CMakeFiles\tuneles.dir\tuneles.cpp.obj.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\tuneles.dir
+  OBJECT_FILE_DIR = CMakeFiles\tuneles.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target tuneles
+
+
+#############################################
+# Link the executable tuneles.exe
+
+build tuneles.exe: CXX_EXECUTABLE_LINKER__tuneles_Debug CMakeFiles/tuneles.dir/tuneles.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\tuneles.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = tuneles.exe
+  TARGET_IMPLIB = libtuneles.dll.a
+  TARGET_PDB = tuneles.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target aristas
+
+
+#############################################
+# Order-only phony target for aristas
+
+build cmake_object_order_depends_target_aristas: phony || .
+
+build CMakeFiles/aristas.dir/aristas.cpp.obj: CXX_COMPILER__aristas_unscanned_Debug C$:/Users/carri/Documents/UBA/algoritmos3/tda/tda_tp2/aristas.cpp || cmake_object_order_depends_target_aristas
+  DEP_FILE = CMakeFiles\aristas.dir\aristas.cpp.obj.d
+  FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\aristas.dir
+  OBJECT_FILE_DIR = CMakeFiles\aristas.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target aristas
+
+
+#############################################
+# Link the executable aristas.exe
+
+build aristas.exe: CXX_EXECUTABLE_LINKER__aristas_Debug CMakeFiles/aristas.dir/aristas.cpp.obj
+  FLAGS = -g
+  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\aristas.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = aristas.exe
+  TARGET_IMPLIB = libaristas.dll.a
+  TARGET_PDB = aristas.exe.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -99,7 +165,11 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
+build aristas: phony aristas.exe
+
 build bipartitud: phony bipartitud.exe
+
+build tuneles: phony tuneles.exe
 
 # =============================================================================
 # Folder targets.
@@ -109,7 +179,7 @@ build bipartitud: phony bipartitud.exe
 #############################################
 # Folder: C:/Users/carri/Documents/UBA/algoritmos3/tda/tda_tp2/cmake-build-debug
 
-build all: phony bipartitud.exe
+build all: phony bipartitud.exe tuneles.exe aristas.exe
 
 # =============================================================================
 # Built-in targets

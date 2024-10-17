@@ -15,7 +15,9 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					]
 				}
 			],
@@ -30,7 +32,9 @@
 					"name" : "tda_tp2",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					]
 				}
 			],
@@ -38,9 +42,23 @@
 			[
 				{
 					"directoryIndex" : 0,
+					"id" : "aristas::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aristas-Debug-b9c20e2326150ebd31a2.json",
+					"name" : "aristas",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "bipartitud::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-bipartitud-Debug-f81aeb7aed0a3666c0dd.json",
 					"name" : "bipartitud",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "tuneles::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-tuneles-Debug-ab720c8e2e0f637c57c9.json",
+					"name" : "tuneles",
 					"projectIndex" : 0
 				}
 			]
