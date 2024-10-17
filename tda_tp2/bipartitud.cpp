@@ -4,28 +4,31 @@
 
 #include <iostream>
 #include <vector>
+#define white (-1)
+#define gray 0
+#define black 1
 using namespace std;
 
-int N, even_odd[2];
+long long N, even_odd[2];
 vector<int> color;
 vector<vector<int>> adjacency;
 
 void dfs (const int v,const int mod2) {
-    color[v] = 0;
+    color[v] = gray;
     even_odd[mod2]++;
     for (const int u : adjacency[v]) {
-        if (color[u] == -1) {
+        if (color[u] == white) {
             dfs(u, 1-mod2);
 
         }
     }
-    color[v] = 1;
+    color[v] = black;
 
 }
 
 int main () {
     cin >> N;
-    color.assign(N, -1);
+    color.assign(N, white);
     adjacency.resize(N);
     for (int i = 0; i < N-1; i++) {
         int u, v; cin >> u >> v;
@@ -34,7 +37,7 @@ int main () {
 
     }
     dfs(0, 0);
-    const int sol = (even_odd[0]*even_odd[1]) - (N-1);
+    const long long sol = (even_odd[0]*even_odd[1]) - (N-1);
     cout << sol << endl;
     return 0;
 
