@@ -2,3 +2,5 @@ practicas/.idea
 practicas/cmake-build-debug
 tda_tp2/cmake-build-debug
 tda_tp2/.idea
+tda_tp2/CMakeLists.txt
+practicas/CMakeLists.txt
