@@ -130,8 +130,8 @@ void kruskal (DisjointSet& DS, vector<Edge>& edges) {
             for (int j = first; j <= last; j++) {
                 if (uRefs[j-first] != vRefs[j-first]) {
                     DS.Union(edges[j].u, edges[j].v);
-                    MSTAdjacency[edges[j].u].clear();
-                    MSTAdjacency[edges[j].v].clear();
+                    MSTAdjacency[uRefs[j-first]].clear();
+                    MSTAdjacency[vRefs[j-first]].clear();
                     if (parent[uRefs[j-first]] == vRefs[j-first]) {
                         if (cover[uRefs[j-first]] == 0) {
                             MST[edges[j].index] = "any";
