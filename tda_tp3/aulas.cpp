@@ -5,14 +5,14 @@
 #include <queue>
 #include <vector>
 #include <iostream>
-using namespace std;
 
-int n, m, students, capacities;
-vector<int> parent, status;
-vector<vector<bool>> inNetwork;
-vector<vector<int>> residualCapacity, residualNetwork;
+int n, m;
+long long students, capacities;
+std::vector<int> parent, status;
+std::vector<std::vector<bool>> inNetwork;
+std::vector<std::vector<int>> residualCapacity, residualNetwork;
 
-#define INF 100000
+#define infinity 100000
 
 #define Discovered 1
 #define Discovering 0
@@ -24,18 +24,20 @@ vector<vector<int>> residualCapacity, residualNetwork;
 #define iLayer(x) ((x > n && x != sink) ? (x-n) : (x))
 #define jLayer(x) ((x < n+1 && x != source) ? (x+n) : (x))
 
-void bfs (vector<vector<int>>& AdjacencyList, const int root) {
+void bfs (std::vector<std::vector<int>>& AdjacencyList, const int root) {
     status.assign(2*n+2,notDiscovered);
     parent.assign(2*n+2, noParent);
     /*
      * Empiezo a recorrer desde la raiz.
      */
     status[root] = Discovering;
-    queue<int> Q;
+    std::queue<int> Q;
     Q.push(root);
+
     bool breakWhile = false;
     while (!Q.empty()) {
         const int u = Q.front(); Q.pop();
+
         for (int v : AdjacencyList[u]) {
             if (status[v] == notDiscovered) {
                 if (residualCapacity[u][v] > 0) {
@@ -44,9 +46,11 @@ void bfs (vector<vector<int>>& AdjacencyList, const int root) {
                      */
                     status[v] = Discovering;
                     parent[v] = u;
+
                     if (v == sink) {
                         breakWhile = true;
                         break;
+
                     }
                     Q.push(v);
 
@@ -62,9 +66,9 @@ void bfs (vector<vector<int>>& AdjacencyList, const int root) {
     }
 }
 
-int augmentPath () {
+long long augmentPath () {
     int node = sink;
-    int minCapacity = INF;
+    long long minCapacity = infinity;
     while (parent[node] != noParent) {
         /*
          * Busco mínimo del camino de aumento.
@@ -76,7 +80,9 @@ int augmentPath () {
         node = parent[node];
 
     }
-
+    /*
+     * Actualizo red residual en el sumidero.
+     */
     node = sink;
     residualCapacity[node][parent[node]] += minCapacity;
     residualCapacity[parent[node]][node] -= minCapacity;
@@ -105,15 +111,15 @@ int augmentPath () {
 
 }
 
-int FFEK (vector<vector<int>>& AdjacencyList) {
-    int maxFlow = 0;
+long long FFEK (std::vector<std::vector<int>>& AdjacencyList) {
+    long long maxFlow = 0;
     while (true) {
         bfs(AdjacencyList, source);
         /*
          * Me fijo si hay camino de aumento.
          */
         if (parent[sink] == noParent) break;
-        const int flow = augmentPath();
+        const long long flow = augmentPath();
         /*
          * Aumento el flujo
          */
@@ -121,28 +127,29 @@ int FFEK (vector<vector<int>>& AdjacencyList) {
 
     }
     return maxFlow;
+
 }
 
 int main () {
-    cin >> n >> m;
+    std::cin >> n >> m;
     /*
-     * Matrices inNetwork (binaria) y residualCapacity, para operar en O(1).
+     * Matrices inNetwork (binaria) y residualCapacity.
      */
-    residualCapacity.assign(2*n+2, vector<int>(2*n+2, 0));
-    inNetwork.assign(n+2, vector<bool>(n+2, false));
+    residualCapacity.assign(2*n+2, std::vector<int>(2*n+2, 0));
+    inNetwork.assign(n+2, std::vector<bool>(n+2, false));
     /*
      * Lista de adyacencia de la red residual:
      *       Posición [0] es Source y [2n+1] es Sink.
      *       Posición [i], 1 <= i <= n corresponde primera Layer.
      *       Posición [j], n+1 <= j <= 2n corresponde a segunda Layer.
      */
-    residualNetwork.assign(2*n+2, vector<int>());
+    residualNetwork.assign(2*n+2, std::vector<int>());
     students = 0;
     for (int i = 1; i <= n; i++) {
         /*
          * Asignación original de aulas.
          */
-        int a; cin >> a;
+        int a; std::cin >> a;
         inNetwork[source][i] = true;
         residualCapacity[source][iLayer(i)] = a;
         residualNetwork[i].push_back(source);
@@ -152,7 +159,7 @@ int main () {
          * Posibilidad de que no sean cambiados de aula.
          */
         inNetwork[i][i] = true;
-        residualCapacity[iLayer(i)][jLayer(i)] = a;
+        residualCapacity[iLayer(i)][jLayer(i)] = infinity;
         residualNetwork[iLayer(i)].push_back(jLayer(i));
         residualNetwork[jLayer(i)].push_back(iLayer(i));
 
@@ -162,7 +169,7 @@ int main () {
         /*
          * Capacidad de las aulas.
          */
-        int b; cin >> b;
+        int b; std::cin >> b;
         inNetwork[j][n+1] = true;
         residualCapacity[jLayer(j)][sink] = b;
         residualNetwork[sink].push_back(jLayer(j));
@@ -174,31 +181,34 @@ int main () {
         /*
          * Posibles cambios de aulas.
          */
-        int i, j; cin >> i >> j;
+        int i, j; std::cin >> i >> j;
         inNetwork[i][j] = true;
         inNetwork[j][i] = true;
-        residualCapacity[iLayer(i)][jLayer(j)] = residualCapacity[source][iLayer(i)];
-        residualCapacity[iLayer(j)][jLayer(i)] = residualCapacity[source][iLayer(j)];
+        residualCapacity[iLayer(i)][jLayer(j)] = infinity;
+        residualCapacity[iLayer(j)][jLayer(i)] = infinity;
         residualNetwork[iLayer(i)].push_back(jLayer(j));
         residualNetwork[iLayer(j)].push_back(jLayer(i));
+        residualNetwork[jLayer(i)].push_back(iLayer(j));
+        residualNetwork[jLayer(j)].push_back(iLayer(i));
 
     }
     if (students != capacities) {
-        cout << "NO" << endl;
+        std::cout << "NO" << std::endl;
 
     } else {
-        const int maxFlow = FFEK(residualNetwork);
+        const long long maxFlow = FFEK(residualNetwork);
         if (maxFlow != students) {
-            cout << "NO" << endl;
+            std::cout << "NO" << std::endl;
 
         } else {
-            cout << "YES" << endl;
+            std::cout << "YES" << std::endl;
             for (int i = 1; i <= n; i++) {
                 for (int j = 1; j <= n; j++) {
-                    cout << residualCapacity[jLayer(j)][iLayer(i)] << " ";
+                    std::cout << residualCapacity[jLayer(j)][iLayer(i)] << " ";
 
                 }
-                cout << endl;
+                std::cout << std::endl;
+
             }
         }
     }
